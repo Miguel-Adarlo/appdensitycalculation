@@ -2,7 +2,7 @@
 Data Science Toolbox Discussion Exercise
 
 ## Computing Barangay Density
-**1. Find the number of barangays per region**
+**1. Find the number of barangays per region**\
 Done by aggregation in R.
 
 ```
@@ -23,7 +23,7 @@ for (x in 1:18)
 }
 ```
 
-**2. Divide the area of the region by the number of barangays**
+**2. Divide the area of the region by the number of barangays**\
 Done by division in R
 
 ```
@@ -33,7 +33,7 @@ r2$brgyarea = regionarea$Area/r2$numbrgy
 }
 ```
 
-**3. Divide the population of each barangay by its area**
+**3. Divide the population of each barangay by its area**\
 Done by division in R after a merging of dataframes.
 
 ```
@@ -47,7 +47,7 @@ pop_region$popdensity = pop_region$Population/pop_region$brgyarea
 }
 ```
 
-**4. Sort and save the Top 5 Barangay Population Density
+**4. Sort and save the Top 5 Barangay Population Density**\
 Done with R.
 
 ```
