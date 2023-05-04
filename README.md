@@ -67,3 +67,71 @@ write.csv(top5_brgy, file = './Top5_Brgy_Density.csv')
 }
 ```
 
+## Computing City Density
+**1. Find the number of cities per region**\
+Done by aggregation in R.
+
+```
+{
+#Aggregation:
+regionlist = aggregate(x = population$CityProvince,           # Specify data column
+                       by = list(population$Region),          # Specify group indicator
+                       FUN = function(x) length(unique(x)))   #Desired function
+
+colnames(regionlist)[1] = 'Region'     #change column names          
+colnames(regionlist)[2] = 'CityCount'               
+sum(regionlist$CityCount) #verify number of cities}
+```
+
+**2. Divide the area of the region by the number of cities**\
+Done by division in R
+
+```
+{
+df_region = merge(x = regionlist, y = regionarea, by = 'Region', all.x = TRUE) #Left join, get the area per region from region area
+df_region$CityArea = df_region$Area/df_region$CityCount #divide region area to num of cities
+}
+```
+
+**3. Find the population sum for each city**\
+Done by aggregation in R.
+
+```
+{
+populationsum = aggregate(data = population,                       # Specify data column
+                          Population ~ Region + CityProvince,      # Specify group indicator
+                          FUN = sum)                               #Desired function
+
+colnames(populationsum)[1] = 'Region'  
+colnames(populationsum)[2] = 'CityProvince'    
+}
+```
+
+**4. Divide the population of each city by its area**\
+Done by division in R after a merging of dataframes.
+
+```
+{
+#Merge tables with city area and population
+df = merge(x = populationsum, y = df_region, by = 'Region')
+
+#Solve for City Density
+df$CityDensity = df$Population / df$CityArea
+}
+```
+
+**5. Sort and save the Top 5 City Population Density**\
+Done with R.
+
+```
+{
+#Sort in decreasing order to get top 5
+df2 = df[order(df$CityDensity, decreasing = TRUE),]
+
+#Print CSV
+CityDF = subset(df2, select = c('CityProvince', 'CityDensity'))
+top5_city = head(CityDF, 5)
+write.csv(top5_city, file = './Top5_City_Density.csv')
+}
+```
+
