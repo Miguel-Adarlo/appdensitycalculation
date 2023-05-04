@@ -3,7 +3,7 @@ Data Science Toolbox Discussion Exercise
 
 ## Computing Barangay Density
 **1. Find the number of barangays per region**\
-Done by aggregation in R.
+Done by aggregation in R. Result was the number of barangays per region.
 
 ```
 {
@@ -23,8 +23,8 @@ for (x in 1:18)
 }
 ```
 
-**2. Divide the area of the region by the number of barangays**\
-Done by division in R
+**2. Divide the area of the region by the number of barangays per region**\
+Done by division in R. Result was the area of each barangay.
 
 ```
 {
@@ -34,7 +34,7 @@ r2$brgyarea = regionarea$Area/r2$numbrgy
 ```
 
 **3. Divide the population of each barangay by its area**\
-Done by division in R after a merging of dataframes.
+Done by division in R after a merging of dataframes. Result was the population density.
 
 ```
 {
@@ -48,7 +48,7 @@ pop_region$popdensity = pop_region$Population/pop_region$brgyarea
 ```
 
 **4. Sort and save the Top 5 Barangay Population Density**\
-Done with R.
+Done with R. Result was a CSV file detailing the top 5 most densely populated barangays.
 
 ```
 {
@@ -69,7 +69,7 @@ write.csv(top5_brgy, file = './Top5_Brgy_Density.csv')
 
 ## Computing City Density
 **1. Find the number of cities per region**\
-Done by aggregation in R.
+Done by aggregation in R. Result was the number of cities per region.
 
 ```
 {
@@ -84,7 +84,7 @@ sum(regionlist$CityCount) #verify number of cities}
 ```
 
 **2. Divide the area of the region by the number of cities**\
-Done by division in R
+Done by division in R. Result was the area of each city.
 
 ```
 {
@@ -94,7 +94,7 @@ df_region$CityArea = df_region$Area/df_region$CityCount #divide region area to n
 ```
 
 **3. Find the population sum for each city**\
-Done by aggregation in R.
+Done by aggregation in R. Result was the population per city.
 
 ```
 {
@@ -108,7 +108,7 @@ colnames(populationsum)[2] = 'CityProvince'
 ```
 
 **4. Divide the population of each city by its area**\
-Done by division in R after a merging of dataframes.
+Done by division in R after a merging of dataframes. Result was the population density per city.
 
 ```
 {
@@ -121,7 +121,7 @@ df$CityDensity = df$Population / df$CityArea
 ```
 
 **5. Sort and save the Top 5 City Population Density**\
-Done with R.
+Done with R. Result was a CSV file detailing the top 5 most densely populated cities.
 
 ```
 {
